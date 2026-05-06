@@ -1,0 +1,45 @@
+{
+  "mcpServers": {
+    "prism": {
+      "command": "node",
+      "args": ["./scripts/prism_mcp_server.mjs", "--transport", "stdio"],
+      "cwd": ".",
+      "tool_timeout_sec": 300,
+      "tools": {
+        "list_projects": {
+          "approval_mode": "approve"
+        },
+        "get_project": {
+          "approval_mode": "approve"
+        },
+        "list_files": {
+          "approval_mode": "approve"
+        },
+        "read_file": {
+          "approval_mode": "approve"
+        },
+        "download_file": {
+          "approval_mode": "prompt"
+        },
+        "write_file": {
+          "approval_mode": "prompt"
+        },
+        "upload_file": {
+          "approval_mode": "prompt"
+        },
+        "create_file": {
+          "approval_mode": "prompt"
+        },
+        "sync_status": {
+          "approval_mode": "approve"
+        },
+        "sync_pull": {
+          "approval_mode": "prompt"
+        },
+        "sync_push": {
+          "approval_mode": "prompt"
+        }
+      }
+    }
+  }
+}

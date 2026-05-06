@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prism"
+  short_description: "Work with Prism projects, files, and sync"
+  icon_small: "./assets/icon.png"
+  icon_large: "./assets/icon.png"
+  default_prompt: "Use $prism to find Prism projects, inspect files, and safely sync local LaTeX work with Prism."

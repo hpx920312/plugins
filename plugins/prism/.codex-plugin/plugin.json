@@ -1,0 +1,49 @@
+{
+  "name": "prism",
+  "version": "0.1.0",
+  "description": "Work with OpenAI Prism projects, files, and local folder sync from Codex.",
+  "author": {
+    "name": "OpenAI",
+    "email": "support@openai.com",
+    "url": "https://openai.com/"
+  },
+  "homepage": "https://openai.com/prism",
+  "repository": "https://github.com/openai/plugins",
+  "license": "MIT",
+  "keywords": [
+    "prism",
+    "latex",
+    "tex",
+    "pdf",
+    "projects",
+    "files",
+    "sync",
+    "research",
+    "documents"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Prism",
+    "shortDescription": "Work with Prism projects, files, and sync",
+    "longDescription": "Use Prism from Codex to find projects, inspect and download project files, upload changes, and keep a local folder synchronized with a Prism project while preserving safe conflict handling.",
+    "developerName": "OpenAI",
+    "category": "Research",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://openai.com/prism",
+    "privacyPolicyURL": "https://openai.com/policies/privacy-policy/",
+    "termsOfServiceURL": "https://openai.com/policies/terms-of-use/",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/icon.png",
+    "defaultPrompt": [
+      "Show my Prism projects",
+      "Pull this Prism project into a local folder",
+      "Sync my local LaTeX folder with the Prism project"
+    ],
+    "brandColor": "#60A5FA",
+    "screenshots": []
+  }
+}
