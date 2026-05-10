@@ -14,7 +14,9 @@ Use these rules when a SwiftUI screen is large, scroll-heavy, frequently updated
 - Avoid swapping entire top-level view trees for small state changes; keep a stable root view and vary localized sections or modifiers.
 - Prefer value-based modifiers over `.if`-style helpers when a condition changes only styling or behavior.
 - Avoid `AnyView`, stored builder closures, and manual `Binding(get:set:)` in hot paths when concrete views, stored child views, or key-path bindings would do.
-- Keep `GeometryReader` and high-volume environment writes tightly scoped so one hot signal does not wake an unrelated subtree.
+- Keep `GeometryReader`, preference chains, and high-volume environment writes tightly scoped so one hot signal does not wake an unrelated subtree.
+- Use `@State` only for view-owned state, not as an ad hoc cache for arbitrary expensive computation.
+- Scope animation to the smallest view that owns the visual change; prefer scoped `.animation(...) { content in ... }` modifiers when available over broad animation modifiers on large containers.
 
 ## Example: stable identity
 
@@ -66,3 +68,5 @@ If the work is more expensive than a small derived property, move it into a mode
 - Building custom scroll containers when `List`, `LazyVStack`, or `LazyHGrid` would already solve the problem
 - Using `.id(...)` as a force-refresh mechanism instead of a real identity boundary
 - Reaching for `.equatable()` before composition and dependency scope have been fixed
+- Publishing broad preference payloads or geometry changes on every tiny layout update
+- Animating an entire container when only a small row, control, or transition changes

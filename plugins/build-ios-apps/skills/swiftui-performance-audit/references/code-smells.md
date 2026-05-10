@@ -158,6 +158,20 @@ Rapidly changing environment values wake every environment-reading descendant. P
 
 Large subtrees under `GeometryReader` or `ScrollViewReader` can react to layout changes they do not care about. Keep reader scope tight and move unrelated stateful content outside.
 
+### Broad preference chains
+
+`PreferenceKey`, `anchorPreference`, `overlayPreferenceValue`, and `onPreferenceChange` can move layout data across a wide subtree. Keep payloads small and stable, and publish them from the measured view rather than from a broad container.
+
+### Geometry-driven state loops
+
+```swift
+.onPreferenceChange(FramePreferenceKey.self) { frame in
+    selectedFrame = frame
+}
+```
+
+If the state write changes layout, SwiftUI can emit another measurement and repeat the cycle. Compare against the previous value, threshold noisy values, or move the state boundary closer to the measured view.
+
 ### Broad `ObservableObject` reads on iOS 16 and earlier
 
 ```swift
@@ -205,6 +219,35 @@ Toggle("Enabled", isOn: Binding(
 
 Prefer `$model.isEnabled` when a key-path binding exists. Manual bindings store closures and are harder to diff between updates.
 
+## Animation smells
+
+### Broad container animations
+
+```swift
+VStack {
+    Header()
+    List(items) { item in
+        Row(item)
+    }
+}
+.animation(.default, value: selection)
+```
+
+Broad animation modifiers can animate unrelated child updates and add layout work across a large subtree. Apply animation to the smallest view that owns the visual change, such as the row, control, or transition.
+
+When the animation belongs to a subset of a larger view and the deployment target supports it, prefer SwiftUI's scoped animation modifier:
+
+```swift
+List(items) { item in
+    Row(item)
+        .animation(.default) { content in
+            content.opacity(item.id == selection ? 1 : 0.5)
+        }
+}
+```
+
+Only the modifiers applied inside the closure inherit the animation. On older deployment targets, move the animation modifier to the smallest affected view.
+
 ## Remediation notes
 
 ### `@State` is not a generic cache
@@ -216,6 +259,8 @@ Better alternatives:
 - update derived state in response to a specific input change
 - memoize in a dedicated helper
 - preprocess on a background task before rendering
+
+If the value is derived from inputs, document or encode the exact input-change path that refreshes it.
 
 ### `@ObservationIgnored` should be surgical
 

@@ -96,6 +96,10 @@ Prefer:
 
 `@State` is not a generic cache. Use it only when the derived value belongs to the view lifecycle and has a clear update contract.
 
+- Define which input changes refresh the state.
+- Prefer model or store precomputation when the value is not view-owned.
+- Prefer memoized helpers or background preprocessing when the work is expensive but not stateful UI.
+
 ## Lists and large collections
 
 - Prefer `List` for table-like content with system affordances.
@@ -113,11 +117,13 @@ Flag views that hold many unrelated `@State` values or read a large observable j
 
 ### Narrow geometry scope
 
-Treat `GeometryReader`, `ScrollViewReader`, and preference chains as hot spots.
+Treat these APIs as hot spots when they feed state or sit above large subtrees: `GeometryReader`, `ScrollViewReader`, `PreferenceKey`, `anchorPreference`, `overlayPreferenceValue`, and `onPreferenceChange`.
 
 - Keep them around only the subtree that needs geometry.
 - Move unrelated stateful descendants outside the reader subtree.
+- Keep preference payloads small, stable, and tied to the coordinate space where they will be consumed.
 - Avoid geometry-driven state loops unless the geometry materially changes the UI.
+- Compare or threshold measured values before writing state so tiny layout changes do not create a measure-update-layout cycle.
 
 ### Avoid high-volume environment writes
 
@@ -192,6 +198,7 @@ Manual bindings store closures and are harder for SwiftUI to compare across upda
 
 - Decode and downsample large images before rendering.
 - Avoid broad animation modifiers that cause a large subtree to animate for tiny state changes.
+- Flag `.animation(..., value:)` or `withAnimation` usage that wraps a large container when only a small control, row, or transition should animate. Prefer SwiftUI's scoped `.animation(...) { content in ... }` modifier when the deployment target supports it; otherwise move the animation modifier to the smallest affected view.
 - Prefer focused transitions over animating entire container hierarchies.
 
 ## Profiling
@@ -211,12 +218,14 @@ Always ask:
 
 1. Is there `AnyView` in a hot path?
 2. Is any code reachable from `body` doing heavy work?
-3. Are list identities stable and unique?
-4. Does each `ForEach` element produce one stable root?
-5. Are parent views, geometry readers, or environment writes causing broad invalidation?
-6. Is Observation being used with narrow reads and correct ignored state?
-7. Is heavy work tied to lifecycle modifiers or the main actor?
-8. Are stored builder closures or broad action captures causing avoidable churn?
-9. Are manual bindings used where key-path bindings would work?
-10. Could similar branches be value-based modifiers instead of tree swaps?
-11. Is `.equatable()` backed by real evidence rather than hope?
+3. Is `@State` being used as an ad hoc cache without a clear input-change contract?
+4. Are list identities stable and unique?
+5. Does each `ForEach` element produce one stable root?
+6. Are parent views, geometry readers, preference chains, or environment writes causing broad invalidation?
+7. Is Observation being used with narrow reads and correct ignored state?
+8. Is heavy work tied to lifecycle modifiers or the main actor?
+9. Are stored builder closures or broad action captures causing avoidable churn?
+10. Are manual bindings used where key-path bindings would work?
+11. Could similar branches be value-based modifiers instead of tree swaps?
+12. Is `.equatable()` backed by real evidence rather than hope?
+13. Is animation scoped to the smallest view that owns the visual change?
