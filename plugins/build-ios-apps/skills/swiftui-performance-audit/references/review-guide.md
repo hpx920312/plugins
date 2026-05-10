@@ -141,6 +141,7 @@ When reacting to high-frequency signals, prefer thresholds, debouncing, or model
 
 - Stable IDs matter most when rows own state.
 - Keep row-scoped state on a stable row root when child content appears and disappears conditionally.
+- In lazy containers, put row-lifetime `@State` on the stable root view returned from `ForEach`. Nested child state can be recreated after offscreen content is rebuilt; lift it to the row root, pass a binding, or move it into a model when it must survive scrolling.
 - Treat dynamic index IDs as suspicious whenever the collection mutates.
 
 ## Concurrency and lifecycle modifiers

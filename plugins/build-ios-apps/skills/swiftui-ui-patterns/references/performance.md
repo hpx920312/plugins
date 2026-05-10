@@ -8,6 +8,7 @@ Use these rules when a SwiftUI screen is large, scroll-heavy, frequently updated
 
 - Give `ForEach` and list content stable identity. Do not use unstable indices as identity when the collection can reorder or mutate.
 - Keep one stable root view per `ForEach` element; filter before iterating instead of making rows appear and disappear at the root.
+- In lazy containers, keep row-lifetime `@State` on the stable root view returned from `ForEach`; nested child state can be recreated when offscreen content is rebuilt.
 - Keep expensive filtering, sorting, and formatting out of `body`; precompute or move it into a model/helper when it is not trivial.
 - Narrow observation scope so only the views that read changing state need to update.
 - Prefer lazy containers for larger scrolling content and extract subviews when only part of a screen changes frequently.
