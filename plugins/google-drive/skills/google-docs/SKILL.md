@@ -6,7 +6,7 @@ description: Documents-first net-new Google Docs creation plus connector-first G
 # Google Docs
 
 Use this skill for Google Docs work in Codex local-plugin sessions where Browser Use and rendered visual inspection are unavailable.
-Net-new Google Doc deliverables must be authored through `[@documents](plugin://documents@openai-primary-runtime)` as local `.docx` files first, then uploaded as native Google Docs.
+Net-new Google Doc deliverables must be authored through `[@documents](plugin://documents@openai-primary-runtime)` as local `.docx` files first, then imported with the Google Drive plugin as native Google Docs.
 
 ## Purpose Of This File
 
@@ -22,10 +22,13 @@ Latency is not a constraint for this skill, so always read the relevant referenc
 
 Use this routing:
 
-1. Net-new Google Docs creation: use `[@documents](plugin://documents@openai-primary-runtime)` to create a local `.docx` first, including that skill's DOCX QA workflow.
-2. Upload and convert the `.docx` into Drive as a native Google Docs document. Read `references/reference-import-docx-to-native-docs.md`.
-3. If the Documents plugin is unavailable, do not create the net-new Google Doc directly. Report that the required local Documents authoring path is unavailable.
-4. Existing Google Docs reads, summaries, edits, comments, and template-preserving modifications: use Google Docs connector or app tools directly.
+1. Net-new Google Docs creation: use `[@documents](plugin://documents@openai-primary-runtime)` to create a local `.docx` first, including that skill's DOCX QA workflow. Then read `references/reference-import-docx-to-native-docs.md` and import with `mcp__codex_apps__google_drive_import_document` using `upload_mode: "native_google_docs"`.
+2. If the Documents plugin is unavailable, do not create the net-new Google Doc directly. Report that the required local Documents authoring path is unavailable.
+3. Existing Google Docs reads, summaries, edits, comments, and template-preserving modifications: use Google Docs connector or app tools directly.
+
+For net-new Google Docs, the DOCX-import path is the only currently supported high-quality workflow. Do not create a blank Google Doc and fill it with Google Docs write APIs, use Computer Use, use Browser Use, or build the document directly in Google Drive unless the user explicitly asks for that alternate workflow. If they do, mention first that output quality is expected to be best when a local `.docx` is imported through the Google Drive plugin.
+
+The import reference owns the exact connector action, plugin install/reinstall handling, native-conversion verification, and connector-readback expectations. Read it before any net-new Google Docs import attempt.
 
 Do not reference the local `.docx` in the final answer after successful native import. The final answer includes the Google Docs link only.
 
