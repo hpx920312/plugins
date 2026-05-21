@@ -32,6 +32,7 @@ Steps:
 4. Verify the import response reports native conversion with MIME type `application/vnd.google-apps.document` and a Google Docs URL or document id.
 5. If the desired Google Doc title needs adjustment after import, rename the native Google Doc with `mcp__codex_apps__google_drive_update_file(...)` or the equivalent Drive metadata update tool after upload.
 6. Read the imported document with the Google Docs connector and verify that core headings, body text, tables, and other connector-visible content survived conversion.
+7. Confirm the Google Docs URL or document id you will return was observed in the completed import response, connector readback, or Drive metadata readback. Do not synthesize or predict a Google Docs URL, and do not return any URL before readback verification succeeds.
 
 ## Preservation Mode
 
@@ -43,5 +44,6 @@ Drive-hosted Word file, not a native Google Doc.
 
 ## Final Answer
 
-Return the native Google Doc title and link or id when available.
+Return the native Google Doc title and link or id only after import completion and connector readback verification.
+Use only a link or id observed in the completed import response, connector readback, or Drive metadata readback. If readback fails, do not present the URL as ready.
 Do not cite the local `.docx` path in the final answer after a successful native import.

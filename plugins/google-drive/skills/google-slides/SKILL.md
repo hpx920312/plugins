@@ -38,6 +38,8 @@ For net-new Google Slides, the PPTX-import path is the only currently supported 
 
 The import reference owns the exact connector action, plugin install/reinstall handling, native-conversion verification, post-import verification, and cleanup expectations. Read it before any net-new Google Slides import attempt.
 
+For imports and any explicit direct-create override, wait for the write action to complete, then perform connector readback or Drive metadata readback before returning a Google Slides URL or presentation id. Use only a URL or id observed from the completed connector result or readback. Do not synthesize or predict Google Slides URLs, and do not present a URL as ready if readback fails.
+
 ## Non-Negotiable Output Invariant
 
 Inserted or edited content must match the target deck's existing structure and connector-observable presentation closely enough that it reads as native deck content.
@@ -76,7 +78,8 @@ Before final handoff, explicitly verify these with connector readback and thumbn
 6. no slide in a multi-slide task was skipped, duplicated, or left in a mixed old/new state
 7. no visual property is claimed as verified unless connector data or a fresh thumbnail supports it
 8. final presentation output is an editable Google Slides deck, not one PNG per slide; verify editable components with `mcp__codex_apps__google_drive_get_presentation` or `mcp__codex_apps__google_drive_get_slide`
-9. Even though you created a local pptx, do not cite the local pptx path as a deliverable in your final answer. Your final answer must only reference the gsuite link.
+9. for imports and direct creates, the final returned URL or presentation id came from a completed connector result or readback, not a predicted Google Slides URL
+10. Even though you created a local pptx, do not cite the local pptx path as a deliverable in your final answer. Your final answer must only reference the verified gsuite link.
 
 **Slides**
 

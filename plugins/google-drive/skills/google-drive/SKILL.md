@@ -46,6 +46,7 @@ Start with Google Drive for file discovery and file lifecycle tasks, then route 
 - Preserve the user's existing file organization, sharing state, and target artifact unless the request clearly asks to change them.
 - When a task can be satisfied by a file-level Drive operation alone, do not load heavier Docs, Sheets, or Slides skills.
 - For write-heavy Sheets or Slides work, read the specialized skill before the first large update so request shapes stay grounded.
+- For any file import or explicit direct create that returns a user-facing Google Workspace link, wait for the write action to complete and verify the created file with connector readback or Drive metadata readback before returning the URL. Use only a URL or id observed from the completed connector result or readback; never synthesize or predict the URL.
 
 ## Related Skills
 

@@ -30,7 +30,9 @@ For net-new Google Docs, the DOCX-import path is the only currently supported hi
 
 The import reference owns the exact connector action, plugin install/reinstall handling, native-conversion verification, and connector-readback expectations. Read it before any net-new Google Docs import attempt.
 
-Do not reference the local `.docx` in the final answer after successful native import. The final answer includes the Google Docs link only.
+For imports and any explicit direct-create override, wait for the write action to complete, then perform connector readback or Drive metadata readback before returning a Google Docs URL or document id. Use only a URL or id observed from the completed connector result or readback. Do not synthesize or predict Google Docs URLs, and do not present a URL as ready if readback fails.
+
+Do not reference the local `.docx` in the final answer after successful native import. The final answer includes the verified Google Docs link only.
 
 ## Runtime Model
 
@@ -85,6 +87,7 @@ Before final handoff, explicitly verify these with connector readback:
 4. when available, export the document as `text/html` through Google Drive and use the generated markup/CSS as a rendered-structure proxy for heading tags, font families, font sizes, table cells, fills, widths, and paragraph ordering
 5. the document is not relying on one repeated structure everywhere; for example, a long run of similar tables or identical header colors should be treated as a design smell unless the source template clearly calls for it
 6. if neither connector readback nor HTML export exposes enough data to prove a rendered visual property, do not assert that property as verified
+7. for imports and direct creates, the final returned URL or document id came from a completed connector result or readback, not a predicted Google Docs URL
 
 If any check fails, the task is not complete.
 If a simple known-good workflow is available and the run instead collapses into repeated fallback experiments, the task is also not complete.

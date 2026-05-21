@@ -16,9 +16,10 @@ When to read: local `.ppt`, `.pptx`, or `.odp` input.
    ```
 4. Read the imported deck and record presentation id, title, URL when available, slide count, and major slide titles.
 5. Read Drive metadata for the imported file and confirm MIME type is `application/vnd.google-apps.presentation`.
-6. Compare imported slide count to the source count when available.
-7. Run thumbnail verification for the imported deck before follow-on edits.
-8. Continue in this skill with the relevant references for summaries, content edits, visual cleanup, template migration, or structural repair.
+6. Confirm the Google Slides URL or presentation id you will return was observed in the completed import response, connector readback, or Drive metadata readback. Do not synthesize or predict a Google Slides URL, and do not return any URL before readback verification succeeds.
+7. Compare imported slide count to the source count when available.
+8. Run thumbnail verification for the imported deck before follow-on edits.
+9. Continue in this skill with the relevant references for summaries, content edits, visual cleanup, template migration, or structural repair.
 
 ## Rules
 
@@ -35,4 +36,4 @@ Only use a non-native upload when the user explicitly asks to preserve the Power
 
 ## Output
 
-Return the imported deck title and link or id when available, note any obvious import drift, and name the follow-on workflow used if more work was requested.
+Return the imported deck title and link or id only after import completion and connector readback verification. Use only a link or id observed in the completed import response, connector readback, or Drive metadata readback. If readback fails, do not present the URL as ready. Note any obvious import drift, and name the follow-on workflow used if more work was requested.
