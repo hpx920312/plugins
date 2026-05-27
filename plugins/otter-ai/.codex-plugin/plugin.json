@@ -1,7 +1,7 @@
 {
   "name": "otter-ai",
   "version": "1.0.0",
-  "description": "The Otter.ai MCP server connects Codex to your meeting intelligence, enabling search and retrieval of tra...",
+  "description": "Access Otter.ai meeting transcripts, summaries, action items, and meeting metadata from Codex.",
   "author": {
     "name": "Otter.ai",
     "url": "https://otter.ai"
@@ -9,20 +9,30 @@
   "homepage": "https://otter.ai",
   "repository": "https://github.com/openai/plugins",
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "otter",
+    "meetings",
+    "transcripts",
+    "summaries",
+    "action-items",
+    "productivity"
+  ],
   "apps": "./.app.json",
   "interface": {
     "displayName": "Otter.ai",
-    "shortDescription": "The Otter.ai MCP server connects Codex to your meeting intelligence, enabling search and retrieval of tra...",
-    "longDescription": "The Otter.ai MCP server connects Codex to your meeting intelligence, enabling search and retrieval of transcripts, summaries, action items, and meeting metadata directly within your workflow. Search meetings by keyword, date range, attendee, folder, or channel, then fetch full transcripts with speaker attribution. Use it to prepare for meetings by reviewing past discussions, extract decisions from historical conversations, or synthesize insights across your meeting archive. Supports both personal and enterprise Otter.ai workspaces.",
+    "shortDescription": "Access Otter.ai meeting transcripts, summaries, and action items.",
+    "longDescription": "Otter.ai connects Codex to your meeting intelligence so you can search past conversations, retrieve transcripts, summarize decisions, and extract action items directly in your workflow.",
     "developerName": "Otter.ai",
     "category": "Productivity",
     "capabilities": [],
     "websiteURL": "https://otter.ai",
     "privacyPolicyURL": "https://otter.ai/privacy-policy",
     "termsOfServiceURL": "https://otter.ai/terms-of-service",
+    "brandColor": "#000000",
     "defaultPrompt": [
-      "List recent meetings"
+      "Find my recent Otter.ai meetings about this project and summarize key decisions.",
+      "Pull the Otter.ai transcript for my latest customer call and extract action items.",
+      "Search Otter.ai for mentions of this account and summarize follow-ups."
     ],
     "screenshots": [],
     "composerIcon": "./assets/app-icon.png",
