@@ -16,7 +16,6 @@
     "documents",
     "storage"
   ],
-  "skills": "./skills/",
   "apps": "./.app.json",
   "interface": {
     "displayName": "Dropbox",
