@@ -1,7 +1,7 @@
 {
   "name": "wix",
   "version": "1.1.0",
-  "description": "Build and deploy Wix apps and headless websites, and manage your Wix business. Includes CLI development skills, Wix Headless for any frontend framework, and business solution recipes for eCommerce, CMS, dashboard extensions, and more.",
+  "description": "Build and deploy Wix apps and headless websites, and manage your Wix business. Includes CLI development skills, Wix Headless for any frontend framework, and Wix MCP server for eCommerce, CMS, dashboard extensions, and more.",
   "author": {
     "name": "Wix",
     "url": "https://dev.wix.com"
@@ -12,6 +12,7 @@
   "keywords": [
     "wix",
     "wix-cli",
+    "wix-mcp",
     "ecommerce",
     "cms",
     "wix-apps",
@@ -22,9 +23,9 @@
   "interface": {
     "displayName": "Wix",
     "shortDescription": "Build Wix apps, headless websites, and manage your Wix business from Codex",
-    "longDescription": "Build and deploy Wix apps and headless websites, and manage your Wix business with Codex. Includes Wix CLI development skills for dashboard extensions, backend APIs, site widgets, service plugins, and data collections. Build headless websites with Wix Headless, from fully hosted Astro apps to self-hosted projects in any framework, powered by Wix backend services for eCommerce, bookings, CMS, events, and members. Also includes recipes for Wix business solution management.",
+    "longDescription": "Build and deploy Wix apps and headless websites, and manage your Wix business with Codex. Includes Wix CLI development skills for dashboard extensions, backend APIs, site widgets, service plugins, and data collections. Build headless websites with Wix Headless — from fully-hosted Astro apps to self-hosted in any framework — powered by Wix's backend for eCommerce, bookings, CMS, events, and members. Also includes recipes for Wix business solution management.",
     "developerName": "Wix",
-    "category": "Developer Tools",
+    "category": "Coding",
     "capabilities": [
       "Interactive",
       "Read",
@@ -35,7 +36,7 @@
     "termsOfServiceURL": "https://www.wix.com/about/terms-of-use",
     "defaultPrompt": [
       "Build a Wix app extension with Wix Design System UI",
-      "Build a headless website with Wix backend services",
+      "Build a Wix app with a shipping fee service plugin",
       "Set up Wix Stores products, pickup, or CMS data"
     ],
     "brandColor": "#116DFF",
