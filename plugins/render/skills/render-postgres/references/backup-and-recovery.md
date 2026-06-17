@@ -13,7 +13,7 @@ On **paid** plans that include it, **point-in-time recovery** lets you restore t
 For full logical exports you control:
 
 - **`pg_dump`** — flexible; use for migrations and archives.
-- **Custom format (recommended for larger DBs):**  
+- **Custom format (recommended for larger DBs):**
   `pg_dump -Fc` produces a compressed custom archive suitable for **`pg_restore`** with parallel restore options.
 
 For databases **under ~2 GB**, **Render `psql`** (Dashboard/shell access where enabled) is often enough for ad hoc work and smaller dumps; validate size and timeout limits before relying on it for large datasets.

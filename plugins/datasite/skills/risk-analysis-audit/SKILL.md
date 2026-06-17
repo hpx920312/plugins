@@ -379,4 +379,3 @@ Reconnect via Settings → Extensions → Datasite. Resume from the last complet
 
 **`updateContent` or `createContent` returns a permissions error**
 The user's Datasite account may not have Editor permissions on this project. Ask them to check their role in Datasite project settings.
-

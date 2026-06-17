@@ -186,4 +186,3 @@ not a gap to fill.
 incorrect, never "correct" a page number; the cover page says so.
 - Be explicit about what a tool confirmed versus what needs the attorney's judgment. This
 skill flags; it does not bless.
-
