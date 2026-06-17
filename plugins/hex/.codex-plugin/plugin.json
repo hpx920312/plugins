@@ -1,0 +1,42 @@
+{
+  "name": "hex",
+  "version": "0.1.0",
+  "description": "Hex workflows for searching projects, using Hex Threads, and operating on Hex projects with the CLI.",
+  "author": {
+    "name": "OpenAI"
+  },
+  "homepage": "https://hex.tech/",
+  "repository": "https://github.com/openai/plugins/tree/main/plugins/hex",
+  "license": "Proprietary",
+  "keywords": [
+    "hex",
+    "cli",
+    "data-analysis",
+    "analytics",
+    "threads",
+    "dashboards",
+    "notebooks"
+  ],
+  "skills": "./skills/",
+  "apps": "./.app.json",
+  "interface": {
+    "displayName": "Hex",
+    "shortDescription": "Search Hex projects, ask Threads, and use the CLI",
+    "longDescription": "Hex helps users find existing Hex projects, dashboards, and data apps, ask Hex Threads questions, and use the terminal Hex CLI for concrete project, cell, and run operations when the user explicitly wants to work in Hex.",
+    "developerName": "Hex",
+    "category": "Data & Analytics",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://hex.tech/",
+    "privacyPolicyURL": "https://learn.hex.tech/docs/trust/privacy-policy",
+    "termsOfServiceURL": "https://learn.hex.tech/docs/legal/terms-and-conditions",
+    "defaultPrompt": "Search Hex projects, ask a Hex Thread question, or use the Hex CLI when the user explicitly wants Hex.",
+    "brandColor": "#182A4D",
+    "composerIcon": "./assets/hex-small.svg",
+    "logo": "./assets/hex.svg",
+    "screenshots": []
+  }
+}
