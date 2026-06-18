@@ -36,8 +36,8 @@
       "Inspect GitLab issues and merge requests relevant to this task."
     ],
     "brandColor": "#FC6D26",
-    "composerIcon": "./assets/gitlab.svg",
-    "logo": "./assets/gitlab.svg",
+    "composerIcon": "./assets/gitlab-small.svg",
+    "logo": "./assets/logo.png",
     "screenshots": []
   }
 }
