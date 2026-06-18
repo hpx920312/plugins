@@ -23,7 +23,7 @@
     "shortDescription": "Inspect GitLab projects, issues, and merge requests",
     "longDescription": "Use GitLab to inspect projects, issues, merge requests, diffs, commits, comments, and related code context through the GitLab connector.",
     "developerName": "OpenAI",
-    "category": "Coding",
+    "category": "Developer Tools",
     "capabilities": [
       "Interactive",
       "Read",
