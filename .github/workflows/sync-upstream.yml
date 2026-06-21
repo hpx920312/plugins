@@ -1,0 +1,66 @@
+name: Sync upstream
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Merge upstream main
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git remote add upstream https://github.com/openai/plugins.git
+          git fetch upstream main
+          git merge --no-edit -X theirs upstream/main
+
+      - name: Keep fork marketplace name
+        run: |
+          node <<'NODE'
+          const fs = require("fs");
+          const path = ".agents/plugins/marketplace.json";
+          const original = fs.readFileSync(path, "utf8");
+          const updated = original.replace(
+            /^(\s*"name"\s*:\s*)"[^"]+"/m,
+            '$1"hpx-openai-plugins"'
+          );
+          if (updated === original && !original.includes('"name": "hpx-openai-plugins"')) {
+            throw new Error("Could not update marketplace name");
+          }
+          fs.writeFileSync(path, updated);
+          NODE
+
+      - name: Commit and push changes
+        run: |
+          set -euo pipefail
+
+          if ! git diff --quiet; then
+            git add .agents/plugins/marketplace.json
+            git commit -m "Keep fork marketplace name"
+          fi
+
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            git push origin HEAD:main
+          else
+            echo "Already up to date."
+          fi
